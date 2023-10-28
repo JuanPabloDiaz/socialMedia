@@ -1,10 +1,18 @@
+import { Router, Route } from "react-router-dom";
+
 import "./globals.css";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-8xl font-bold underline">Hello world!</h1>
-    </div>
+    <main className="flex h-screen">
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/sign-in" element={<SighinForm />} />
+        <Route path="/sign-up" element={<SighupForm />} />
+        {/* Private Routes */}
+        <Route index element={<Home />} />
+      </Routes>
+    </main>
   );
 };
 
