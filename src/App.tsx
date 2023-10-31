@@ -7,6 +7,10 @@ import { Home } from "./_root/Pages";
 import AuthLayout from "./_auth/AuthLayout";
 import RootLayout from "./_root/RootLayout";
 
+/* WORKING ON MY OWN BUG */
+import "dotenv/config";
+/* END WORKING ON MY OWN BUG */
+
 const App = () => {
   return (
     <main className="flex h-screen">
