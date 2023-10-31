@@ -9,7 +9,7 @@ export const SignupValidation = z.object({
     .string()
     .min(2, { message: "Username is too short" })
     .max(50, { message: "Username is too short" }),
-  email: z.string().email({ message: "Please enter a valid email" }).e,
+  email: z.string().email(),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
