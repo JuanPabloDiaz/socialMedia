@@ -6,11 +6,11 @@ export const appwriteConfig = {
 };
 
 export const client = new Client();
+// console.log(import.meta.env.MODE);
 
 client.setEndpoint(appwriteConfig.url);
 client.setProject(appwriteConfig.projectId);
 
-// console.log(import.meta.env.MODE);
 console.log(appwriteConfig.url);
 console.log(appwriteConfig.projectId);
 
