@@ -1,3 +1,5 @@
+// File Verified by comparing it to Source code: https://github.com/adrianhajdin/social_media_app
+
 import {
   useQuery,
   useMutation,
@@ -5,8 +7,12 @@ import {
   useInfiniteQuery,
 } from "@tanstack/react-query";
 
-import { createUserAccount } from "../appwrite/api";
+import { createUserAccount, signInAccount } from "@/lib/appwrite/api";
 import { INewUser } from "@/types";
+
+// ============================================================
+// AUTH QUERIES
+// ============================================================
 
 export const useCreateUserAccount = () => {
   return useMutation({
