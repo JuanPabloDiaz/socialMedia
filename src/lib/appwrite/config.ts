@@ -16,8 +16,8 @@ export const client = new Client();
 client.setEndpoint(appwriteConfig.url);
 client.setProject(appwriteConfig.projectId);
 
-console.log(appwriteConfig.url);
-console.log(appwriteConfig.projectId);
+// console.log(appwriteConfig.url);
+// console.log(appwriteConfig.projectId);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
