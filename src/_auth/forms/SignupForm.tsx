@@ -53,7 +53,7 @@ const SignupForm = () => {
 
     if (!newUser) {
       return toast({
-        title: "Sign up failed. Please try again later. No user created.",
+        title: "Sign up failed. Please try again later. | No user created.",
       });
       console.log("!newUser: " + newUser);
     }
@@ -65,14 +65,15 @@ const SignupForm = () => {
 
     if (!session) {
       return toast({
-        title: "Sign in failed. Please try again later. Session not created.",
+        title: "Sign in failed. Please try again later. | Session not created.",
       });
     }
 
     const isLoggedIn = await checkAuthUser();
 
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       form.reset();
+      console.log("isLoggedIn: " + isLoggedIn);
 
       navigate("/");
     } else {
