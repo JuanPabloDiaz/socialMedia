@@ -1,3 +1,5 @@
+// Verified Source Code: https://github.com/adrianhajdin/social_media_app/blob/main/src/context/AuthContext.tsx
+
 import { getCurrentUser } from "@/lib/appwrite/api";
 import { IContextType, IUser } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -14,7 +16,7 @@ export const INITIAL_USER = {
 
 const INITIAL_STATE = {
   user: INITIAL_USER,
-  isLoading: false, //* check this line ---> isPending maybe
+  isLoading: false,
   isAuthenticated: false,
   setUser: () => {},
   setIsAuthenticated: () => {},
@@ -34,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
+
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
@@ -44,8 +47,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           bio: currentAccount.bio,
         });
         setIsAuthenticated(true);
+
         return true;
       }
+
       return false;
     } catch (error) {
       console.log(error);

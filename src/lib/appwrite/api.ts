@@ -27,6 +27,7 @@ export async function createUserAccount(user: INewUser) {
     });
 
     return newUser;
+    console.log("new user created: " + newUser);
   } catch (error) {
     console.log(error);
     return error;
@@ -73,6 +74,7 @@ export async function getCurrentUser() {
       [Query.equal("accountId", currentAccount.$id)]
     );
     if (!currentUser) throw Error;
+
     return currentUser.documents[0];
   } catch (error) {
     console.log(error);

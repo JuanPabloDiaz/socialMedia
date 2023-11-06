@@ -53,9 +53,9 @@ const SignupForm = () => {
 
     if (!newUser) {
       return toast({
-        title: "Sign up failed. Please try again later.",
+        title: "Sign up failed. Please try again later. No user created.",
       });
-      // console.log(newUser);
+      console.log("!newUser: " + newUser);
     }
 
     const session = await signInAccount({
@@ -65,7 +65,7 @@ const SignupForm = () => {
 
     if (!session) {
       return toast({
-        title: "Sign in failed. Please try again later.",
+        title: "Sign in failed. Please try again later. Session not created.",
       });
     }
 
@@ -76,7 +76,7 @@ const SignupForm = () => {
 
       navigate("/");
     } else {
-      return toast({ title: "Sign up failed. Please try again later." });
+      return toast({ title: "2. Sign up failed. Please try again later." });
     }
   }
 
