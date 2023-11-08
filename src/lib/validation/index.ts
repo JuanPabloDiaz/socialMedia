@@ -21,5 +21,18 @@ export const SigninValidation = z.object({
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
-    .max(60, { message: "Password is too long" }),
+    .max(60, { message: "Password is too long. Maximum 60 caracters" }),
+});
+
+export const PostValidation = z.object({
+  caption: z
+    .string()
+    .min(5, { message: "Minimum 5 caracters" })
+    .max(2200, { message: "Maximum 2,200 caracters" }),
+  file: z.custom<File[]>(),
+  location: z
+    .string()
+    .min(1, { message: "This field is required" })
+    .max(100, { message: "This field is too long" }),
+  tags: z.string(),
 });
