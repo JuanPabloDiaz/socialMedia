@@ -1,4 +1,4 @@
-// File Verified by comparing it to Source code: https://github.com/adrianhajdin/social_media_app
+// Source code: https://github.com/adrianhajdin/social_media_app
 
 import {
   useQuery,
@@ -46,6 +46,7 @@ export const useSignOutAccount = () => {
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (post: INewPost) => createPost(post),
     onSuccess: () => {

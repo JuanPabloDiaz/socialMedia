@@ -3,6 +3,7 @@ import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 
 const Home = () => {
+  // Hook:
   const {
     data: posts,
     isPending: isPostLoading,

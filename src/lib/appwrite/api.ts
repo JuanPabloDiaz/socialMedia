@@ -1,10 +1,15 @@
-// File Verified by comparing it to Source code: https://github.com/adrianhajdin/social_media_app
+// Source code: https://github.com/adrianhajdin/social_media_app
 
 import { ID, Query } from "appwrite";
 
-import { appwriteConfig, account, databases, avatars } from "./config";
+import { appwriteConfig, account, databases, avatars, storage } from "./config";
 import { INewPost, INewUser } from "@/types";
 
+// ============================================================
+// AUTH
+// ============================================================
+
+// ============================== SIGN UP
 export async function createUserAccount(user: INewUser) {
   try {
     const newAccount = await account.create(
@@ -34,6 +39,7 @@ export async function createUserAccount(user: INewUser) {
   }
 }
 
+// ============================== SAVE USER TO DB
 export async function saveUserToDB(user: {
   accountId: string;
   email: string;
@@ -54,6 +60,7 @@ export async function saveUserToDB(user: {
   }
 }
 
+// ============================== SIGN IN
 export async function signInAccount(user: { email: string; password: string }) {
   try {
     const session = await account.createEmailSession(user.email, user.password);
@@ -63,6 +70,7 @@ export async function signInAccount(user: { email: string; password: string }) {
   }
 }
 
+// ============================== GET USER
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
@@ -82,6 +90,7 @@ export async function getCurrentUser() {
   }
 }
 
+// ============================== SIGN OUT
 export async function signOutAccount() {
   try {
     const session = await account.deleteSession("current");
@@ -99,22 +108,24 @@ export async function signOutAccount() {
 // ============================== CREATE POST
 export async function createPost(post: INewPost) {
   try {
-    // Upload file to appwrite storage
+    // *** Upload file to appwrite storage ***
     const uploadedFile = await uploadFile(post.file[0]);
 
+    // If No file, throw error
     if (!uploadedFile) throw Error;
 
-    // Get file url
+    // *** Get file url ***
     const fileUrl = getFilePreview(uploadedFile.$id);
+    // If no file url, delete file from storage and throw error
     if (!fileUrl) {
       await deleteFile(uploadedFile.$id);
       throw Error;
     }
 
-    // Convert tags into array
+    // *** Convert tags into array ***
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
-    // Create post
+    // *** Create post ***
     const newPost = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
@@ -129,6 +140,7 @@ export async function createPost(post: INewPost) {
       }
     );
 
+    // If No New POST, delete file from storage
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
       throw Error;

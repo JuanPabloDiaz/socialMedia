@@ -28,6 +28,7 @@ type PostFormProps = {
 const PostForm = ({ post }: PostFormProps) => {
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
+  // Hooks:
   const { user } = useUserContext();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -50,11 +51,13 @@ const PostForm = ({ post }: PostFormProps) => {
       userId: user.id,
     });
 
+    // if NO new post, show error
     if (!newPost) {
       toast({
         title: "Please try again",
       });
     }
+    // if new post, redirect to home page
     navigate("/");
   }
 
