@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import SearchResults from "@/components/shared/SearchResults";
 import GridPostList from "@/components/shared/GridPostList";
@@ -8,8 +8,10 @@ import {
 } from "@/lib/react-query/queriesAndMutations";
 import useDebounce from "@/hooks/useDebounce";
 import Loader from "@/components/shared/Loader";
+import { useInView } from "react-intersection-observer";
 
 const Explore = () => {
+  const { ref, inView } = useInView({ threshold: 0.5 });
   const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
 
   // Seach Posts:
@@ -17,6 +19,11 @@ const Explore = () => {
   const debouncedValue = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } =
     useSearchPosts(debouncedValue);
+
+  // infinite scroll
+  useEffect(() => {
+    if (inView && !searchValue) fetchNextPage();
+  }, [inView, searchValue]);
 
   // console.log(posts);
   // posts are undefined on first render
@@ -53,7 +60,6 @@ const Explore = () => {
           />
         </div>
       </div>
-
       <div className="flex-between w-full max-w-5x1 mt-16 mb-7">
         <h3 className="body-bold md:h3-bold">Popular Today</h3>
         <div className="flex-center gap-3 bg-dark-3 rounded-xI px-4 py-2 cursor-pointer">
@@ -68,7 +74,10 @@ const Explore = () => {
       </div>
       <div className="flex flex-wrap gap-9 w-full max-w-5x1">
         {shouldShowSearchResults ? (
-          <SearchResults />
+          <SearchResults
+            isSearchFetching={isSearchFetching}
+            searchedPosts={searchedPosts}
+          />
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
         ) : (
@@ -77,6 +86,12 @@ const Explore = () => {
           ))
         )}
       </div>
+      {/* Infinite Scroll: */}
+      {hasNextPage && !searchValue && (
+        <div ref={ref} className="mt-10">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
