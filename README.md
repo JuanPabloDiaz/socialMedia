@@ -2,11 +2,11 @@
 
 Build a modern social app with a stunning UI with a native mobile feel, a special tech stack, an infinite scroll feature, and amazing performance using React JS, Appwrite, TypeScript, and more.
 
-### Watch the full Tutorial on [Youtube](https://www.youtube.com/watch?v=_W3R2VwRyF4).
+### Check the [Demo]()
 
 ### Visit the [Figma Design](https://www.figma.com/file/TGm6gNug6PEwEbV8M0Kyll/JSM-YT---Instagram-Clone?type=design&node-id=1-113&mode=design)
 
-### Check the [Demo]()
+### Watch the full Tutorial on [Youtube](https://www.youtube.com/watch?v=_W3R2VwRyF4).
 
 <!-- ABOUT THE PROJECT -->
 
