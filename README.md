@@ -79,3 +79,5 @@ Resources list that I find helpful and would like to give credit to.
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
 - [React Spinners](https://www.davidhu.io/react-spinners/)
 - [React Infinite Scroll Component](https://www.npmjs.com/package/react-infinite-scroll-component)
+- [Shadcn-ui Docs](https://ui.shadcn.com/docs)
+- [Shadcn-ui & React Hook Form](https://ui.shadcn.com/docs/components/form)
